@@ -165,16 +165,32 @@ for (const region of CONTINENTS) {
     ],
     { type: "Sphere" },
   );
-  const round = (n) => Number(n.toFixed(2));
-  const [cx, cy] = projection([-18, -12]).map(round);
-  const r = round((SIZE - PAD * 2) / 2);
-  const disc =
-    `M${cx} ${cy - r} A${r} ${r} 0 1 0 ${cx} ${cy + r} ` +
-    `A${r} ${r} 0 1 0 ${cx} ${cy - r} Z`;
-  const land = geoPath(projection)(geometry).replace(
-    /-?\d+\.\d+/g,
-    (n) => String(Number(Number(n).toFixed(2))),
+  const round2 = (d) =>
+    d.replace(/-?\d+\.\d+/g, (n) => String(Number(Number(n).toFixed(2))));
+  // fitExtent on the Sphere means the globe fills the box exactly, so the disc
+  // is a known circle and two arcs describe it in 60 chars instead of the
+  // ~160-point polyline d3 would emit. Assert the geometry agrees rather than
+  // trusting the arithmetic - deriving this centre by hand got the rotation
+  // sign backwards once and produced a disc that ran outside the viewBox.
+  const [[x0, y0], [x1, y1]] = geoPath(projection).bounds({ type: "Sphere" });
+  const cx = (SIZE / 2).toFixed(2);
+  const cy = (SIZE / 2).toFixed(2);
+  const r = (SIZE - PAD * 2) / 2;
+  const drift = Math.max(
+    Math.abs(x0 - PAD),
+    Math.abs(y0 - PAD),
+    Math.abs(x1 - (SIZE - PAD)),
+    Math.abs(y1 - (SIZE - PAD)),
   );
+  if (drift > 0.01) {
+    console.error(`Globe disc does not match the fitted sphere (${drift})`);
+    process.exit(1);
+  }
+  const disc =
+    `M${cx} ${(SIZE / 2 - r).toFixed(2)} ` +
+    `A${r} ${r} 0 1 0 ${cx} ${(SIZE / 2 + r).toFixed(2)} ` +
+    `A${r} ${r} 0 1 0 ${cx} ${(SIZE / 2 - r).toFixed(2)} Z`;
+  const land = round2(geoPath(projection)(geometry));
   icons.All = `${disc} ${land}`;
   report.push({
     region: "All",

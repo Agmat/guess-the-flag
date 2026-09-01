@@ -328,6 +328,15 @@ button {
 
 /* ------------------------------------------------------------------- hud */
 
+/* Positioned so the deck's absolutely-positioned blanks can never paint over
+   the score or the input, whatever the rotation is tuned to. */
+.hud,
+.answer,
+.result {
+  position: relative;
+  z-index: 1;
+}
+
 .hud {
   display: flex;
   align-items: center;
@@ -406,6 +415,10 @@ button {
 
 .deck {
   position: relative;
+  /* The blanks are rotated, so their corners reach ~19px past the deck's own
+     box - more than the 17.6px flex gap. Without this margin they collide
+     with the HUD above and the input below. */
+  margin-block: 0.5rem;
 }
 
 /* Blank cards behind the live one. They carry no flag, so nothing is spoiled
