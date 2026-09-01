@@ -8,6 +8,7 @@ import {
 import countriesData from "../data/countries.json";
 import { isCorrectAnswer, type Country } from "../lib/match";
 import { shuffle } from "../lib/shuffle";
+import { RegionIcon } from "./RegionIcon";
 import {
   readMistakes,
   withMistake,
@@ -33,8 +34,10 @@ const REGION_STYLE: Record<string, { dot: string; tint: string }> = {
 const FALLBACK_REGION_STYLE = { dot: "#4f46e5", tint: "#eef2ff" };
 
 const HERO_SIZE = 14;
-const HERO_INTERVAL_MS = 2200;
+const HERO_INTERVAL_MS = 3000;
 const FLASH_MS = 550;
+const DISCARD_MS = 420;
+const HERO_DISCARD_MS = 620;
 
 const bestStreakKey = (filter: Filter) => `guess-the-flag:best:${filter}`;
 
@@ -46,6 +49,12 @@ type Phase =
   | "review" // review mode, answering
   | "reviewAnswer" // review mode, showing a missed answer before moving on
   | "reviewDone"; // review mode, reached the end of the deck
+
+/** A card currently flying off the top of the deck. */
+interface Discarded {
+  country: Country;
+  seq: number;
+}
 
 const flagCode = (country: Country) => country.code.toLowerCase();
 const flagSrc = (country: Country) =>
@@ -94,7 +103,13 @@ export default function FlagQuiz() {
     shuffle(COUNTRIES).slice(0, HERO_SIZE),
   );
   const [heroIndex, setHeroIndex] = useState(0);
+  const [outgoing, setOutgoing] = useState<Discarded | null>(null);
+  const [heroOutgoing, setHeroOutgoing] = useState<Discarded | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const discardSeq = useRef(0);
+  const discardTimer = useRef<number | undefined>(undefined);
+  const heroSeq = useRef(0);
+  const heroIndexRef = useRef(0);
 
   const current = deck[index];
   const nextCountry = deck[index + 1];
@@ -115,16 +130,26 @@ export default function FlagQuiz() {
     }
   }, [heroDeck]);
 
-  // Cycle the menu's flag stack, unless the player prefers reduced motion.
+  useEffect(() => {
+    heroIndexRef.current = heroIndex;
+  }, [heroIndex]);
+
+  // Deal the menu's flag stack, unless the player prefers reduced motion.
   useEffect(() => {
     if (phase !== "start") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(
-      () => setHeroIndex((i) => (i + 1) % heroDeck.length),
-      HERO_INTERVAL_MS,
-    );
+    const id = window.setInterval(() => {
+      const leaving = heroDeck[heroIndexRef.current];
+      if (leaving) {
+        heroSeq.current += 1;
+        setHeroOutgoing({ country: leaving, seq: heroSeq.current });
+      }
+      setHeroIndex((i) => (i + 1) % heroDeck.length);
+    }, HERO_INTERVAL_MS);
     return () => window.clearInterval(id);
-  }, [phase, heroDeck.length]);
+  }, [phase, heroDeck]);
+
+  useEffect(() => () => window.clearTimeout(discardTimer.current), []);
 
   useEffect(() => {
     if (phase === "playing" || phase === "review") inputRef.current?.focus();
@@ -151,6 +176,16 @@ export default function FlagQuiz() {
     persistMistakes(withoutMistake(mistakes, code));
   }
 
+  // Send a card flying off the top of the deck. A fresh discard replaces any
+  // card still in flight, so answering faster than the animation just looks
+  // snappy rather than piling elements up.
+  function discard(country: Country): void {
+    discardSeq.current += 1;
+    setOutgoing({ country, seq: discardSeq.current });
+    window.clearTimeout(discardTimer.current);
+    discardTimer.current = window.setTimeout(() => setOutgoing(null), DISCARD_MS);
+  }
+
   function greenFlash(): void {
     setFlash(true);
     window.setTimeout(() => setFlash(false), FLASH_MS);
@@ -165,6 +200,8 @@ export default function FlagQuiz() {
     setInput("");
     setFlash(false);
     setNewBest(false);
+    setOutgoing(null);
+    setHeroOutgoing(null);
     setPhase("playing");
   }
 
@@ -176,6 +213,8 @@ export default function FlagQuiz() {
     setInput("");
     setFlash(false);
     setReviewStats({ correct: 0, seen: 0 });
+    setOutgoing(null);
+    setHeroOutgoing(null);
     setPhase("review");
   }
 
@@ -185,6 +224,12 @@ export default function FlagQuiz() {
       setNewBest(true);
       writeBestStreak(filter, value);
     }
+  }
+
+  // The "Next flag" button after a missed review card: discard, then advance.
+  function nextReviewCard(): void {
+    if (current) discard(current);
+    advanceReview();
   }
 
   function advanceReview(): void {
@@ -215,6 +260,7 @@ export default function FlagQuiz() {
       if (correct) {
         forgetMistake(current.code);
         greenFlash();
+        discard(current);
         advanceReview();
       } else {
         setPhase("reviewAnswer");
@@ -235,6 +281,7 @@ export default function FlagQuiz() {
     setStreak(nextStreak);
     setInput("");
     greenFlash();
+    discard(current);
     if (isLastCard) {
       commitBest(nextStreak);
       setPhase("won");
@@ -251,16 +298,23 @@ export default function FlagQuiz() {
         <div className="hero" aria-hidden="true">
           <div className="hero__card hero__card--back2" />
           <div className="hero__card hero__card--back1" />
-          <div className="hero__card hero__card--front">
+          <div className="hero__card hero__card--front" key={heroCountry?.code}>
             {heroCountry && (
-              <img
-                key={heroCountry.code}
-                className="hero__flag"
-                src={flagSrc(heroCountry)}
-                alt=""
-              />
+              <img className="hero__flag" src={flagSrc(heroCountry)} alt="" />
             )}
           </div>
+          {heroOutgoing && (
+            <div
+              className="hero__card hero__card--outgoing"
+              key={heroOutgoing.seq}
+            >
+              <img
+                className="hero__flag"
+                src={flagSrc(heroOutgoing.country)}
+                alt=""
+              />
+            </div>
+          )}
         </div>
 
         <div className="intro">
@@ -284,7 +338,7 @@ export default function FlagQuiz() {
                 }
                 onClick={() => startRegion(option)}
               >
-                <span className="region__dot" />
+                <RegionIcon region={option} />
                 <span className="region__name">{option}</span>
                 <span className="region__count">{poolFor(option).length}</span>
               </button>
@@ -342,6 +396,10 @@ export default function FlagQuiz() {
     .filter(Boolean)
     .join(" ");
 
+  // The stack scatters only when the run is actually over. A missed card in
+  // review mode keeps the deck intact, because there are still cards to come.
+  const deckClass = `deck${phase === "gameover" ? " deck--spent" : ""}`;
+
   return (
     <section className="quiz">
       <header className="hud">
@@ -378,23 +436,33 @@ export default function FlagQuiz() {
       </header>
 
       {phase !== "reviewDone" && phase !== "won" && (
-        <div className={flagCardClass}>
-          {current && (
-            <img
-              key={current.code}
-              className="flag"
-              src={flagSrc(current)}
-              srcSet={flagSrcSet(current)}
-              sizes="(max-width: 660px) 92vw, 660px"
-              width={640}
-              height={480}
-              alt="Flag to guess"
-            />
-          )}
-          {flash && (
-            <span className="pop-chip" aria-hidden="true">
-              +1
-            </span>
+        <div className={deckClass}>
+          <div className="deck__blank deck__blank--far" />
+          <div className="deck__blank deck__blank--near" />
+          <div className={flagCardClass} key={current?.code ?? "empty"}>
+            {current && (
+              <img
+                className="flag"
+                src={flagSrc(current)}
+                srcSet={flagSrcSet(current)}
+                sizes="(max-width: 660px) 92vw, 660px"
+                alt="Flag to guess"
+              />
+            )}
+            {flash && (
+              <span className="pop-chip" aria-hidden="true">
+                +1
+              </span>
+            )}
+          </div>
+          {outgoing && (
+            <div
+              className="flag-card flag-card--outgoing"
+              key={outgoing.seq}
+              aria-hidden="true"
+            >
+              <img className="flag" src={flagSrc(outgoing.country)} alt="" />
+            </div>
           )}
         </div>
       )}
@@ -426,7 +494,7 @@ export default function FlagQuiz() {
           <p className="result__name">{current.en}</p>
           <p className="result__fr">{current.fr}</p>
           <div className="result__actions">
-            <button className="button" type="button" onClick={advanceReview}>
+            <button className="button" type="button" onClick={nextReviewCard}>
               {isLastCard ? "Finish" : "Next flag"}
             </button>
           </div>
