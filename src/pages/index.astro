@@ -9,19 +9,23 @@ import "../styles/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#eef1f8" />
     <title>Guess the Flag</title>
   </head>
   <body>
-    <h1 class="page-title">
-      <button type="button" class="page-title__home" data-home>Guess the Flag</button>
-    </h1>
-    <p class="page-subtitle">
-      Name the country from its flag. Answers in English or French. One mistake ends the run.
-    </p>
-    <FlagQuiz client:only="react" />
+    <header class="topbar">
+      <button type="button" class="brand" data-home>
+        <span class="brand__mark" aria-hidden="true">🌍</span>
+        Guess the Flag
+      </button>
+    </header>
+
+    <main class="page">
+      <FlagQuiz client:only="react" />
+    </main>
 
     <script>
-      // The title sits outside the React island; a click asks the island to
+      // The brand sits outside the React island; a click asks the island to
       // return to its menu (see the "gtf:home" listener in FlagQuiz.tsx).
       for (const el of document.querySelectorAll("[data-home]")) {
         el.addEventListener("click", () => {
