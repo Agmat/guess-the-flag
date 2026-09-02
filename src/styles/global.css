@@ -507,6 +507,28 @@ button {
   animation: fade-scale 0.35s ease both;
 }
 
+/* Shown instead of .flag when flagcdn.com fails to serve the image. */
+.flag-fallback {
+  display: grid;
+  place-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.flag-fallback__code {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--ink-2);
+}
+
+.flag-fallback__note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 22ch;
+}
+
 .pop-chip {
   position: absolute;
   top: 1rem;

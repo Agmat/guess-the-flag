@@ -84,6 +84,7 @@ export default function FlagQuiz() {
 
   const [input, setInput] = useState("");
   const [flash, setFlash] = useState(false);
+  const [failedCode, setFailedCode] = useState<string | null>(null);
   const [heroDeck] = useState<Country[]>(() =>
     shuffle(COUNTRIES).slice(0, HERO_SIZE),
   );
@@ -149,6 +150,12 @@ export default function FlagQuiz() {
   useEffect(() => {
     if (phase === "playing" || phase === "review") inputRef.current?.focus();
   }, [phase, index]);
+
+  // A card that failed to load stays failed only for itself - the next
+  // flag gets a fresh chance.
+  useEffect(() => {
+    setFailedCode(null);
+  }, [current?.code]);
 
   // The brand (rendered by index.astro, outside this island) dispatches
   // "gtf:home" on click to send the player back to the menu.
@@ -383,13 +390,22 @@ export default function FlagQuiz() {
           <div className="deck__blank deck__blank--far" />
           <div className="deck__blank deck__blank--near" />
           <div className={flagCardClass} key={current?.code ?? "empty"}>
-            {current && (
+            {current && failedCode === current.code && (
+              <div className="flag-fallback">
+                <span className="flag-fallback__code">{current.code}</span>
+                <span className="flag-fallback__note">
+                  Couldn't load this flag — go ahead and guess anyway.
+                </span>
+              </div>
+            )}
+            {current && failedCode !== current.code && (
               <img
                 className="flag"
                 src={flagSrc(current)}
                 srcSet={flagSrcSet(current)}
                 sizes="(max-width: 660px) 92vw, 660px"
                 alt="Flag to guess"
+                onError={() => setFailedCode(current.code)}
               />
             )}
             {flash && (
