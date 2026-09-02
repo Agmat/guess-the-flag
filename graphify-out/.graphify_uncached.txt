@@ -1,0 +1,4 @@
+/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md
+/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md
+/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md
+/Users/gabrielcabanes/Documents/perso/guess-the-flag/public/favicon.svg

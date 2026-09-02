@@ -1,0 +1,516 @@
+{
+  "nodes": [
+    {
+      "id": "agents_agent_instructions",
+      "label": "AGENTS.md Agent Instructions",
+      "file_type": "document",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_background_dev_server",
+      "label": "Background Dev Server Convention (astro dev --background)",
+      "file_type": "rationale",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "lines 1-9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_dev_server_lifecycle_commands",
+      "label": "Dev Server Lifecycle Commands (stop / status / logs)",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_astro_documentation_guides",
+      "label": "Astro Documentation Guide Index",
+      "file_type": "document",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "lines 11-23",
+      "source_url": "https://docs.astro.build",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_routing_guide",
+      "label": "Astro Routing Guide (pages, dynamic routes, middleware)",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 17",
+      "source_url": "https://docs.astro.build/en/guides/routing/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_astro_components_guide",
+      "label": "Astro Components Guide",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 18",
+      "source_url": "https://docs.astro.build/en/basics/astro-components/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_framework_components_guide",
+      "label": "Framework Components Guide (React, Vue, Svelte)",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 19",
+      "source_url": "https://docs.astro.build/en/guides/framework-components/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_content_collections_guide",
+      "label": "Content Collections Guide",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 20",
+      "source_url": "https://docs.astro.build/en/guides/content-collections/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_styling_tailwind_guide",
+      "label": "Styling and Tailwind Guide",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 21",
+      "source_url": "https://docs.astro.build/en/guides/styling/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_internationalization_guide",
+      "label": "Internationalization Guide (multiple languages)",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 22",
+      "source_url": "https://docs.astro.build/en/guides/internationalization/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_agent_instructions",
+      "label": "CLAUDE.md Agent Instructions",
+      "file_type": "document",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_background_dev_server",
+      "label": "Background Dev Server Convention (CLAUDE.md)",
+      "file_type": "rationale",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": "lines 1-9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_astro_documentation_guides",
+      "label": "Astro Documentation Guide Index (CLAUDE.md)",
+      "file_type": "document",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": "lines 11-23",
+      "source_url": "https://docs.astro.build",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_astro_starter_kit_minimal",
+      "label": "Astro Starter Kit: Minimal",
+      "file_type": "document",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "lines 1-7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_project_structure",
+      "label": "Project Structure (public/, src/pages/, package.json)",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "lines 9-26",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_file_based_routing",
+      "label": "File-Based Routing in src/pages",
+      "file_type": "rationale",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 22",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_components_directory_convention",
+      "label": "src/components Convention",
+      "file_type": "rationale",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 24",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_public_static_assets",
+      "label": "public/ Static Assets Directory",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 26",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_npm_commands",
+      "label": "npm Command Table (install, dev, build, preview, astro)",
+      "file_type": "concept",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "lines 28-39",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_index_astro_page",
+      "label": "src/pages/index.astro Entry Page",
+      "file_type": "code",
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 18",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_agent_instructions",
+      "target": "agents_background_dev_server",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "lines 1-9",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_background_dev_server",
+      "target": "agents_dev_server_lifecycle_commands",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 9",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_agent_instructions",
+      "target": "agents_astro_documentation_guides",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "lines 11-13",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_astro_documentation_guides",
+      "target": "agents_routing_guide",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 17",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_astro_documentation_guides",
+      "target": "agents_astro_components_guide",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 18",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_astro_documentation_guides",
+      "target": "agents_framework_components_guide",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 19",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_astro_documentation_guides",
+      "target": "agents_content_collections_guide",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 20",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_astro_documentation_guides",
+      "target": "agents_styling_tailwind_guide",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 21",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_astro_documentation_guides",
+      "target": "agents_internationalization_guide",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md",
+      "source_location": "line 22",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agent_instructions",
+      "target": "claude_background_dev_server",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": "lines 1-9",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agent_instructions",
+      "target": "claude_astro_documentation_guides",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": "lines 11-13",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agent_instructions",
+      "target": "agents_agent_instructions",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "claude_background_dev_server",
+      "target": "agents_background_dev_server",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": "lines 1-9",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_astro_documentation_guides",
+      "target": "agents_astro_documentation_guides",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/CLAUDE.md",
+      "source_location": "lines 11-23",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_astro_starter_kit_minimal",
+      "target": "readme_project_structure",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "lines 9-26",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_project_structure",
+      "target": "readme_file_based_routing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 22",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_project_structure",
+      "target": "readme_components_directory_convention",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 24",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_project_structure",
+      "target": "readme_public_static_assets",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 26",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_file_based_routing",
+      "target": "readme_index_astro_page",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "lines 18-22",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_astro_starter_kit_minimal",
+      "target": "readme_npm_commands",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "lines 28-39",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_npm_commands",
+      "target": "agents_background_dev_server",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 35",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_file_based_routing",
+      "target": "agents_routing_guide",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 22",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_components_directory_convention",
+      "target": "agents_framework_components_guide",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 24",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_astro_starter_kit_minimal",
+      "target": "agents_astro_documentation_guides",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md",
+      "source_location": "line 43",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "astro_project_conventions",
+      "label": "Astro Minimal Starter Project Conventions",
+      "nodes": [
+        "readme_project_structure",
+        "readme_file_based_routing",
+        "readme_components_directory_convention",
+        "readme_public_static_assets",
+        "readme_npm_commands"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/README.md"
+    },
+    {
+      "id": "agent_dev_workflow_contract",
+      "label": "Agent Development Workflow Contract (duplicated in AGENTS.md and CLAUDE.md)",
+      "nodes": [
+        "agents_agent_instructions",
+        "claude_agent_instructions",
+        "agents_background_dev_server",
+        "claude_background_dev_server",
+        "agents_dev_server_lifecycle_commands"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md"
+    },
+    {
+      "id": "astro_documentation_guide_set",
+      "label": "Astro Task-Oriented Documentation Guide Set",
+      "nodes": [
+        "agents_routing_guide",
+        "agents_astro_components_guide",
+        "agents_framework_components_guide",
+        "agents_content_collections_guide",
+        "agents_styling_tailwind_guide",
+        "agents_internationalization_guide"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/Users/gabrielcabanes/Documents/perso/guess-the-flag/AGENTS.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
