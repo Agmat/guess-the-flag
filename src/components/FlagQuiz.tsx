@@ -112,19 +112,28 @@ export default function FlagQuiz() {
     if (newBest) writeBestStreak(filter, best);
   }, [newBest, best, filter]);
 
-  // Warm the next flag so it appears instantly on a correct answer.
+  // Warm the next flag so it appears instantly on a correct answer. Match
+  // the rendered <img>'s srcset/sizes (below) so this resolves to the same
+  // cache entry instead of always fetching the larger source.
   useEffect(() => {
     if (!nextCountry) return;
     const img = new Image();
+    img.sizes = "(max-width: 660px) 92vw, 660px";
+    img.srcset = flagSrcSet(nextCountry);
     img.src = flagSrc(nextCountry);
   }, [nextCountry]);
 
+  // Warm only the hero card coming up next, not the whole 14-flag deck -
+  // the menu shouldn't cost more requests than a player who never scrolls
+  // past the first card.
   useEffect(() => {
-    for (const country of heroDeck) {
-      const img = new Image();
-      img.src = flagSrc(country);
-    }
-  }, [heroDeck]);
+    const next = heroDeck[(heroIndex + 1) % heroDeck.length];
+    if (!next) return;
+    const img = new Image();
+    img.sizes = "256px";
+    img.srcset = flagSrcSet(next);
+    img.src = flagSrc(next);
+  }, [heroDeck, heroIndex]);
 
   useEffect(() => {
     heroIndexRef.current = heroIndex;
@@ -250,7 +259,13 @@ export default function FlagQuiz() {
           <div className="hero__card hero__card--back1" />
           <div className="hero__card hero__card--front" key={heroCountry?.code}>
             {heroCountry && (
-              <img className="hero__flag" src={flagSrc(heroCountry)} alt="" />
+              <img
+                className="hero__flag"
+                src={flagSrc(heroCountry)}
+                srcSet={flagSrcSet(heroCountry)}
+                sizes="256px"
+                alt=""
+              />
             )}
           </div>
           {heroOutgoing && (
@@ -261,6 +276,8 @@ export default function FlagQuiz() {
               <img
                 className="hero__flag"
                 src={flagSrc(heroOutgoing.country)}
+                srcSet={flagSrcSet(heroOutgoing.country)}
+                sizes="256px"
                 alt=""
               />
             </div>
