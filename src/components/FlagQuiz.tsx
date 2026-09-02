@@ -2,6 +2,7 @@ import {
   type CSSProperties,
   type FormEvent,
   useEffect,
+  useReducer,
   useRef,
   useState,
 } from "react";
@@ -9,12 +10,8 @@ import countriesData from "../data/countries.json";
 import { isCorrectAnswer, type Country } from "../lib/match";
 import { shuffle } from "../lib/shuffle";
 import { RegionIcon } from "./RegionIcon";
-import {
-  readMistakes,
-  withMistake,
-  withoutMistake,
-  writeMistakes,
-} from "../lib/mistakes";
+import { gameReducer, initialState } from "../lib/game";
+import { readMistakes, writeMistakes } from "../lib/mistakes";
 
 const COUNTRIES = countriesData as unknown as Country[];
 
@@ -39,16 +36,7 @@ const FLASH_MS = 550;
 const DISCARD_MS = 420;
 const HERO_DISCARD_MS = 620;
 
-const bestStreakKey = (filter: Filter) => `guess-the-flag:best:${filter}`;
-
-type Phase =
-  | "start"
-  | "playing" // region mode, answering
-  | "gameover" // region mode, run ended on a wrong answer
-  | "won" // region mode, whole pool cleared
-  | "review" // review mode, answering
-  | "reviewAnswer" // review mode, showing a missed answer before moving on
-  | "reviewDone"; // review mode, reached the end of the deck
+const bestStreakKey = (filter: string) => `guess-the-flag:best:${filter}`;
 
 /** A card currently flying off the top of the deck. */
 interface Discarded {
@@ -69,7 +57,7 @@ const poolFor = (filter: Filter) =>
     ? COUNTRIES
     : COUNTRIES.filter((country) => country.continent === filter);
 
-function readBestStreak(filter: Filter): number {
+function readBestStreak(filter: string): number {
   try {
     const raw = localStorage.getItem(bestStreakKey(filter));
     const value = raw ? Number.parseInt(raw, 10) : 0;
@@ -79,7 +67,7 @@ function readBestStreak(filter: Filter): number {
   }
 }
 
-function writeBestStreak(filter: Filter, value: number): void {
+function writeBestStreak(filter: string, value: number): void {
   try {
     localStorage.setItem(bestStreakKey(filter), String(value));
   } catch {
@@ -88,17 +76,14 @@ function writeBestStreak(filter: Filter, value: number): void {
 }
 
 export default function FlagQuiz() {
-  const [filter, setFilter] = useState<Filter>("All");
-  const [deck, setDeck] = useState<Country[]>([]);
-  const [index, setIndex] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [best, setBest] = useState(0);
-  const [phase, setPhase] = useState<Phase>("start");
+  const [state, dispatch] = useReducer(gameReducer, [], () =>
+    initialState(readMistakes()),
+  );
+  const { phase, filter, deck, index, streak, best, newBest, mistakes, reviewStats } =
+    state;
+
   const [input, setInput] = useState("");
   const [flash, setFlash] = useState(false);
-  const [mistakes, setMistakes] = useState<string[]>(() => readMistakes());
-  const [reviewStats, setReviewStats] = useState({ correct: 0, seen: 0 });
-  const [newBest, setNewBest] = useState(false);
   const [heroDeck] = useState<Country[]>(() =>
     shuffle(COUNTRIES).slice(0, HERO_SIZE),
   );
@@ -115,6 +100,16 @@ export default function FlagQuiz() {
   const nextCountry = deck[index + 1];
   const isLastCard = index + 1 >= deck.length;
   const heroCountry = heroDeck[heroIndex];
+
+  // Persist the mistakes list whenever the reducer changes it.
+  useEffect(() => {
+    writeMistakes(mistakes);
+  }, [mistakes]);
+
+  // Persist a new best streak whenever the reducer sets one.
+  useEffect(() => {
+    if (newBest) writeBestStreak(filter, best);
+  }, [newBest, best, filter]);
 
   // Warm the next flag so it appears instantly on a correct answer.
   useEffect(() => {
@@ -158,23 +153,10 @@ export default function FlagQuiz() {
   // The brand (rendered by index.astro, outside this island) dispatches
   // "gtf:home" on click to send the player back to the menu.
   useEffect(() => {
-    const goToMenu = () => setPhase("start");
+    const goToMenu = () => dispatch({ type: "goHome" });
     window.addEventListener("gtf:home", goToMenu);
     return () => window.removeEventListener("gtf:home", goToMenu);
   }, []);
-
-  function persistMistakes(next: string[]): void {
-    setMistakes(next);
-    writeMistakes(next);
-  }
-
-  function recordMistake(code: string): void {
-    persistMistakes(withMistake(mistakes, code));
-  }
-
-  function forgetMistake(code: string): void {
-    persistMistakes(withoutMistake(mistakes, code));
-  }
 
   // Send a card flying off the top of the deck. A fresh discard replaces any
   // card still in flight, so answering faster than the animation just looks
@@ -192,54 +174,33 @@ export default function FlagQuiz() {
   }
 
   function startRegion(nextFilter: Filter): void {
-    setFilter(nextFilter);
-    setBest(readBestStreak(nextFilter));
-    setDeck(shuffle(poolFor(nextFilter)));
-    setIndex(0);
-    setStreak(0);
     setInput("");
     setFlash(false);
-    setNewBest(false);
     setOutgoing(null);
     setHeroOutgoing(null);
-    setPhase("playing");
+    dispatch({
+      type: "startRegion",
+      filter: nextFilter,
+      deck: shuffle(poolFor(nextFilter)),
+      best: readBestStreak(nextFilter),
+    });
   }
 
   function startReview(): void {
     const pool = COUNTRIES.filter((country) => mistakes.includes(country.code));
     if (pool.length === 0) return;
-    setDeck(shuffle(pool));
-    setIndex(0);
     setInput("");
     setFlash(false);
-    setReviewStats({ correct: 0, seen: 0 });
     setOutgoing(null);
     setHeroOutgoing(null);
-    setPhase("review");
-  }
-
-  function commitBest(value: number): void {
-    if (value > best) {
-      setBest(value);
-      setNewBest(true);
-      writeBestStreak(filter, value);
-    }
+    dispatch({ type: "startReview", deck: shuffle(pool) });
   }
 
   // The "Next flag" button after a missed review card: discard, then advance.
   function nextReviewCard(): void {
     if (current) discard(current);
-    advanceReview();
-  }
-
-  function advanceReview(): void {
     setInput("");
-    if (isLastCard) {
-      setPhase("reviewDone");
-    } else {
-      setIndex(index + 1);
-      setPhase("review");
-    }
+    dispatch({ type: "advanceReview" });
   }
 
   function handleSubmit(event: FormEvent): void {
@@ -253,41 +214,23 @@ export default function FlagQuiz() {
     const correct = isCorrectAnswer(guess, current, COUNTRIES);
 
     if (phase === "review") {
-      setReviewStats((stats) => ({
-        correct: stats.correct + (correct ? 1 : 0),
-        seen: stats.seen + 1,
-      }));
       if (correct) {
-        forgetMistake(current.code);
         greenFlash();
         discard(current);
-        advanceReview();
-      } else {
-        setPhase("reviewAnswer");
+        setInput("");
       }
+      dispatch({ type: "submit", correct });
       return;
     }
 
     if (phase !== "playing") return;
 
-    if (!correct) {
-      recordMistake(current.code);
-      commitBest(streak);
-      setPhase("gameover");
-      return;
+    if (correct) {
+      setInput("");
+      greenFlash();
+      discard(current);
     }
-
-    const nextStreak = streak + 1;
-    setStreak(nextStreak);
-    setInput("");
-    greenFlash();
-    discard(current);
-    if (isLastCard) {
-      commitBest(nextStreak);
-      setPhase("won");
-    } else {
-      setIndex(index + 1);
-    }
+    dispatch({ type: "submit", correct });
   }
 
   /* ----------------------------------------------------------- start menu */
@@ -368,7 +311,7 @@ export default function FlagQuiz() {
               <button
                 className="link-button"
                 type="button"
-                onClick={() => persistMistakes([])}
+                onClick={() => dispatch({ type: "clearMistakes" })}
               >
                 clear
               </button>
@@ -513,14 +456,14 @@ export default function FlagQuiz() {
             <button
               className="button"
               type="button"
-              onClick={() => startRegion(filter)}
+              onClick={() => startRegion(filter as Filter)}
             >
               Play again
             </button>
             <button
               className="button button--ghost"
               type="button"
-              onClick={() => setPhase("start")}
+              onClick={() => dispatch({ type: "goHome" })}
             >
               Change region
             </button>
@@ -542,14 +485,14 @@ export default function FlagQuiz() {
             <button
               className="button"
               type="button"
-              onClick={() => startRegion(filter)}
+              onClick={() => startRegion(filter as Filter)}
             >
               Play again
             </button>
             <button
               className="button button--ghost"
               type="button"
-              onClick={() => setPhase("start")}
+              onClick={() => dispatch({ type: "goHome" })}
             >
               Change region
             </button>
@@ -577,7 +520,7 @@ export default function FlagQuiz() {
             <button
               className="button button--ghost"
               type="button"
-              onClick={() => setPhase("start")}
+              onClick={() => dispatch({ type: "goHome" })}
             >
               Back to menu
             </button>
