@@ -835,6 +835,54 @@
       "source_location": "L1"
     },
     {
+      "id": "agents",
+      "label": "AGENTS.md",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "agents.md",
+      "source_file": "AGENTS.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_development",
+      "label": "Development",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "development",
+      "source_file": "AGENTS.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_documentation",
+      "label": "Documentation",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentation",
+      "source_file": "AGENTS.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "agents_graphify",
+      "label": "graphify",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "graphify",
+      "source_file": "AGENTS.md",
+      "source_location": "L24"
+    },
+    {
       "id": "package",
       "label": "package.json",
       "_origin": "ast",
@@ -3113,6 +3161,39 @@
       "weight": 1.0
     },
     {
+      "source": "agents",
+      "target": "agents_development",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_documentation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_graphify",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
       "source": "claude",
       "target": "claude_development",
       "relation": "contains",
@@ -4433,5 +4514,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c9910c4c09aae9a57e9e2ec6e414ab479de27432"
+  "built_at_commit": "779d6045921114707008ba359689777d299c3463"
 }

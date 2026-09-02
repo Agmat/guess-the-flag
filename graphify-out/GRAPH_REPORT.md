@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 160 nodes · 227 edges · 11 communities
+- 164 nodes · 230 edges · 12 communities
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c9910c4c`
+- Built from commit: `779d6045`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -25,18 +25,19 @@
 - game.ts
 - Guess the Flag
 - CLAUDE.md
+- AGENTS.md
 
 ## God Nodes (most connected - your core abstractions)
 1. `FlagQuiz()` - 16 edges
 2. `Country` - 9 edges
-3. `scripts` - 8 edges
-4. `isCorrectAnswer()` - 8 edges
+3. `isCorrectAnswer()` - 8 edges
+4. `scripts` - 8 edges
 5. `gameReducer()` - 7 edges
 6. `initialState()` - 6 edges
-7. `normalize()` - 5 edges
-8. `shuffle()` - 5 edges
-9. `startRegion()` - 4 edges
-10. `handleSubmit()` - 4 edges
+7. `shuffle()` - 5 edges
+8. `normalize()` - 5 edges
+9. `handleSubmit()` - 4 edges
+10. `startRegion()` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `playing()` --calls--> `initialState()`  [EXTRACTED]
@@ -53,7 +54,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (11 total, 0 thin omitted)
+## Communities (12 total, 0 thin omitted)
 
 ### Community 0 - "devDependencies"
 Cohesion: 0.12
@@ -95,19 +96,23 @@ Nodes (4): Commands, Data, Guess the Flag, Notable decisions
 Cohesion: 0.50
 Nodes (3): Development, Documentation, graphify
 
+### Community 11 - "AGENTS.md"
+Cohesion: 0.50
+Nodes (3): Development, Documentation, graphify
+
 ## Knowledge Gaps
-- **71 isolated node(s):** `name`, `type`, `version`, `node`, `dev` (+66 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 78 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **74 isolated node(s):** `Development`, `Documentation`, `graphify`, `Filter`, `RegionIconProps` (+69 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 81 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Country` connect `game.ts` to `FlagQuiz.tsx`, `generate-region-icons.mjs`, `match.ts`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+  _High betweenness centrality (0.073) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `package.json`?**
-  _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **What connects `name`, `type`, `version` to the rest of the system?**
-  _71 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.044) - this node is a cross-community bridge._
+- **What connects `Development`, `Documentation`, `graphify` to the rest of the system?**
+  _74 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `devDependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `FlagQuiz.tsx` be split into smaller, more focused modules?**

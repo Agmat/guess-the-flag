@@ -3,9 +3,11 @@
   "1": "FlagQuiz.tsx",
   "2": "package.json",
   "3": "dependencies",
-  "4": "FlagQuiz",
-  "5": "scripts",
-  "6": "aliases.test.ts",
+  "4": "generate-region-icons.mjs",
+  "5": "tsconfig.json",
+  "6": "match.ts",
   "7": "game.ts",
-  "8": "Guess the Flag"
+  "8": "Guess the Flag",
+  "9": "CLAUDE.md",
+  "10": "astro.config.mjs"
 }
