@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate": "node scripts/generate-countries.mjs && node scripts/generate-region-icons.mjs",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.4",
@@ -25,10 +26,12 @@
     "esbuild": true
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "d3-geo": "^3.1.1",
     "i18n-iso-countries": "^7.14.0",
     "topojson-client": "^3.1.0",
     "topojson-simplify": "^3.0.3",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.11",
     "world-atlas": "^2.0.2"
   }

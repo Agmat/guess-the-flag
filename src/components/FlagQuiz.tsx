@@ -479,7 +479,6 @@ export default function FlagQuiz() {
             placeholder="Country name — English or French"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
           />
           <button className="button" type="submit">
