@@ -85,6 +85,9 @@ export default function FlagQuiz() {
   const [input, setInput] = useState("");
   const [flash, setFlash] = useState(false);
   const [failedCode, setFailedCode] = useState<string | null>(null);
+  // Screen-reader announcement for the last answer - the flash and result
+  // panels are visual-only otherwise.
+  const [announcement, setAnnouncement] = useState("");
   const [heroDeck] = useState<Country[]>(() =>
     shuffle(COUNTRIES).slice(0, HERO_SIZE),
   );
@@ -228,6 +231,7 @@ export default function FlagQuiz() {
     // Disambiguate against every country, not just the current pool, so the
     // "names another country" guard keeps working inside a small deck.
     const correct = isCorrectAnswer(guess, current, COUNTRIES);
+    setAnnouncement(correct ? "Correct" : `Wrong — that was ${current.en}`);
 
     if (phase === "review") {
       if (correct) {
@@ -369,6 +373,9 @@ export default function FlagQuiz() {
 
   return (
     <section className="quiz">
+      <p className="sr-only" role="status" aria-live="polite">
+        {announcement}
+      </p>
       <header className="hud">
         <div className="stat">
           <span className="stat__label">{inReview ? "Cleared" : "Streak"}</span>
@@ -404,8 +411,8 @@ export default function FlagQuiz() {
 
       {phase !== "reviewDone" && phase !== "won" && (
         <div className={deckClass}>
-          <div className="deck__blank deck__blank--far" />
-          <div className="deck__blank deck__blank--near" />
+          <div className="deck__blank deck__blank--far" aria-hidden="true" />
+          <div className="deck__blank deck__blank--near" aria-hidden="true" />
           <div className={flagCardClass} key={current?.code ?? "empty"}>
             {current && failedCode === current.code && (
               <div className="flag-fallback">

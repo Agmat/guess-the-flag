@@ -71,6 +71,20 @@ button {
   font-family: inherit;
 }
 
+/* Visually hidden but still reachable by assistive tech - for the answer
+   live region, not for anything sighted players need. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* --------------------------------------------------------------- topbar */
 
 .topbar {
