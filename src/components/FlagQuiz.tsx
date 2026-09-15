@@ -372,7 +372,7 @@ export default function FlagQuiz() {
   const deckClass = `deck${phase === "gameover" ? " deck--spent" : ""}`;
 
   return (
-    <section className="quiz">
+    <section className="quiz quiz--game">
       <p className="sr-only" role="status" aria-live="polite">
         {announcement}
       </p>
@@ -459,7 +459,8 @@ export default function FlagQuiz() {
             autoComplete="off"
             autoCapitalize="off"
             spellCheck={false}
-            placeholder="Country name — English or French"
+            enterKeyHint="go"
+            placeholder="Country name"
             value={input}
             onChange={(event) => setInput(event.target.value)}
             autoFocus

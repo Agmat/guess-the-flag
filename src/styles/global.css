@@ -141,6 +141,7 @@ button {
 
 .page {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,6 +155,19 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+}
+
+/* The game screen fits the visual viewport (--vvh, set by index.astro from
+   visualViewport, which shrinks under the phone keyboard) instead of
+   scrolling: the deck gives up height so score, flag and input stay on
+   screen while typing. The menu keeps the normal scrolling page. */
+body:has(.quiz--game) {
+  height: var(--vvh, 100dvh);
+  min-height: 0;
+}
+
+.quiz--game {
+  min-height: 0;
 }
 
 /* --------------------------------------------------------- start screen */
@@ -429,6 +443,9 @@ button {
 
 .deck {
   position: relative;
+  aspect-ratio: 3 / 2;
+  /* Shrinks first when the screen is short; below this the page scrolls. */
+  min-height: 6rem;
   /* The blanks are rotated, so their corners reach ~19px past the deck's own
      box - more than the 17.6px flex gap. Without this margin they collide
      with the HUD above and the input below. */
@@ -468,8 +485,11 @@ button {
 .flag-card {
   position: relative;
   z-index: 1;
-  aspect-ratio: 3 / 2;
+  height: 100%;
   display: grid;
+  /* Pin the row to the card, not to the image's own height, so the flag's
+     max-height: 100% has something to shrink against. */
+  grid-template-rows: minmax(0, 1fr);
   place-items: center;
   padding: 1.25rem;
   background: var(--surface);
@@ -874,16 +894,21 @@ button {
     font-size: 1.25rem;
   }
 
-  .answer {
-    flex-wrap: wrap;
+  /* Every pixel above the keyboard goes to the flag. */
+  body:has(.quiz--game) .topbar {
+    padding-block: 0.5rem;
   }
 
-  .answer__input {
-    flex: 1 1 100%;
+  body:has(.quiz--game) .page {
+    padding-bottom: 1rem;
   }
 
-  .answer .button {
-    flex: 1;
+  .quiz--game {
+    gap: 0.75rem;
+  }
+
+  .flag-card {
+    padding: 0.75rem;
   }
 
   .review-cta {
