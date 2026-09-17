@@ -40,7 +40,7 @@
       "file_type": "code",
       "norm_label": "discarded",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L51"
+      "source_location": "L42"
     },
     {
       "id": "src_lib_game_action",
@@ -53,7 +53,7 @@
       "file_type": "code",
       "norm_label": "action",
       "source_file": "src/lib/game.ts",
-      "source_location": "L36"
+      "source_location": "L30"
     },
     {
       "id": "src_lib_game_gamestate",
@@ -66,20 +66,7 @@
       "file_type": "code",
       "norm_label": "gamestate",
       "source_file": "src/lib/game.ts",
-      "source_location": "L23"
-    },
-    {
-      "id": "src_lib_game_mode",
-      "label": "Mode",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "game.ts",
-      "file_type": "code",
-      "norm_label": "mode",
-      "source_file": "src/lib/game.ts",
-      "source_location": "L11"
+      "source_location": "L18"
     },
     {
       "id": "src_lib_game_phase",
@@ -92,7 +79,7 @@
       "file_type": "code",
       "norm_label": "phase",
       "source_file": "src/lib/game.ts",
-      "source_location": "L13"
+      "source_location": "L9"
     },
     {
       "id": "src_lib_match_country",
@@ -108,16 +95,16 @@
       "source_location": "L5"
     },
     {
-      "id": "src_components_flagquiz_bestkey",
-      "label": "bestKey()",
+      "id": "src_components_flagquiz_beststreakkey",
+      "label": "bestStreakKey()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "FlagQuiz.tsx",
       "file_type": "code",
-      "norm_label": "bestkey()",
+      "norm_label": "beststreakkey()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L40"
+      "source_location": "L39"
     },
     {
       "id": "src_components_flagquiz_flagcode",
@@ -129,7 +116,7 @@
       "file_type": "code",
       "norm_label": "flagcode()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L56"
+      "source_location": "L47"
     },
     {
       "id": "src_components_flagquiz_flagquiz",
@@ -141,7 +128,7 @@
       "file_type": "code",
       "norm_label": "flagquiz()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L87"
+      "source_location": "L78"
     },
     {
       "id": "src_components_flagquiz_flagquiz_discard",
@@ -153,7 +140,7 @@
       "file_type": "code",
       "norm_label": "discard()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L193"
+      "source_location": "L183"
     },
     {
       "id": "src_components_flagquiz_flagquiz_greenflash",
@@ -165,7 +152,7 @@
       "file_type": "code",
       "norm_label": "greenflash()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L200"
+      "source_location": "L190"
     },
     {
       "id": "src_components_flagquiz_flagquiz_handlesubmit",
@@ -177,19 +164,19 @@
       "file_type": "code",
       "norm_label": "handlesubmit()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L236"
+      "source_location": "L225"
     },
     {
-      "id": "src_components_flagquiz_flagquiz_nextcard",
-      "label": "nextCard()",
+      "id": "src_components_flagquiz_flagquiz_nextreviewcard",
+      "label": "nextReviewCard()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "FlagQuiz.tsx",
       "file_type": "code",
-      "norm_label": "nextcard()",
+      "norm_label": "nextreviewcard()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L230"
+      "source_location": "L219"
     },
     {
       "id": "src_components_flagquiz_flagquiz_startregion",
@@ -201,7 +188,7 @@
       "file_type": "code",
       "norm_label": "startregion()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L205"
+      "source_location": "L195"
     },
     {
       "id": "src_components_flagquiz_flagquiz_startreview",
@@ -213,7 +200,7 @@
       "file_type": "code",
       "norm_label": "startreview()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L219"
+      "source_location": "L208"
     },
     {
       "id": "src_components_flagquiz_flagsrc",
@@ -225,7 +212,7 @@
       "file_type": "code",
       "norm_label": "flagsrc()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L57"
+      "source_location": "L48"
     },
     {
       "id": "src_components_flagquiz_flagsrcset",
@@ -237,7 +224,7 @@
       "file_type": "code",
       "norm_label": "flagsrcset()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L59"
+      "source_location": "L50"
     },
     {
       "id": "src_components_flagquiz_poolfor",
@@ -249,31 +236,31 @@
       "file_type": "code",
       "norm_label": "poolfor()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L64"
+      "source_location": "L55"
     },
     {
-      "id": "src_components_flagquiz_readbest",
-      "label": "readBest()",
+      "id": "src_components_flagquiz_readbeststreak",
+      "label": "readBestStreak()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "FlagQuiz.tsx",
       "file_type": "code",
-      "norm_label": "readbest()",
+      "norm_label": "readbeststreak()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L69"
+      "source_location": "L60"
     },
     {
-      "id": "src_components_flagquiz_writebest",
-      "label": "writeBest()",
+      "id": "src_components_flagquiz_writebeststreak",
+      "label": "writeBestStreak()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "FlagQuiz.tsx",
       "file_type": "code",
-      "norm_label": "writebest()",
+      "norm_label": "writebeststreak()",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L79"
+      "source_location": "L70"
     },
     {
       "id": "src_components_regionicon_regionicon",
@@ -286,6 +273,18 @@
       "norm_label": "regionicon()",
       "source_file": "src/components/RegionIcon.tsx",
       "source_location": "L19"
+    },
+    {
+      "id": "src_lib_mistakes_writemistakes",
+      "label": "writeMistakes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "FlagQuiz.tsx",
+      "file_type": "code",
+      "norm_label": "writemistakes()",
+      "source_file": "src/lib/mistakes.ts",
+      "source_location": "L34"
     },
     {
       "id": "src_lib_shuffle_shuffle",
@@ -429,19 +428,7 @@
       "file_type": "code",
       "norm_label": "advancedeck()",
       "source_file": "src/lib/game.ts",
-      "source_location": "L60"
-    },
-    {
-      "id": "src_lib_game_commitbest",
-      "label": "commitBest()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "game.ts",
-      "file_type": "code",
-      "norm_label": "commitbest()",
-      "source_file": "src/lib/game.ts",
-      "source_location": "L67"
+      "source_location": "L53"
     },
     {
       "id": "src_lib_game_gamereducer",
@@ -453,7 +440,7 @@
       "file_type": "code",
       "norm_label": "gamereducer()",
       "source_file": "src/lib/game.ts",
-      "source_location": "L72"
+      "source_location": "L60"
     },
     {
       "id": "src_lib_game_initialstate",
@@ -465,7 +452,7 @@
       "file_type": "code",
       "norm_label": "initialstate()",
       "source_file": "src/lib/game.ts",
-      "source_location": "L44"
+      "source_location": "L38"
     },
     {
       "id": "src_lib_mistakes_parsemistakelist",
@@ -516,30 +503,6 @@
       "source_location": "L22"
     },
     {
-      "id": "src_lib_mistakes_writemistakes",
-      "label": "writeMistakes()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "game.ts",
-      "file_type": "code",
-      "norm_label": "writemistakes()",
-      "source_file": "src/lib/mistakes.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "tests_game_test_fullrun",
-      "label": "fullRun()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "game.ts",
-      "file_type": "code",
-      "norm_label": "fullrun()",
-      "source_file": "tests/game.test.ts",
-      "source_location": "L24"
-    },
-    {
       "id": "tests_game_test_playing",
       "label": "playing()",
       "_callable": true,
@@ -561,7 +524,7 @@
       "file_type": "code",
       "norm_label": "reviewing()",
       "source_file": "tests/game.test.ts",
-      "source_location": "L28"
+      "source_location": "L24"
     },
     {
       "id": "package_devdependencies",
@@ -806,17 +769,6 @@
       "source_location": "L19"
     },
     {
-      "id": "src_components_flagquiz_modes",
-      "label": "MODES",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "FlagQuiz.tsx",
-      "file_type": "code",
-      "norm_label": "modes",
-      "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L45"
-    },
-    {
       "id": "src_components_flagquiz_region_style",
       "label": "REGION_STYLE",
       "_origin": "ast",
@@ -881,6 +833,54 @@
       "norm_label": "astro.config.mjs",
       "source_file": "astro.config.mjs",
       "source_location": "L1"
+    },
+    {
+      "id": "agents",
+      "label": "AGENTS.md",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "agents.md",
+      "source_file": "AGENTS.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_development",
+      "label": "Development",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "development",
+      "source_file": "AGENTS.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_documentation",
+      "label": "Documentation",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentation",
+      "source_file": "AGENTS.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "agents_graphify",
+      "label": "graphify",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "AGENTS.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "graphify",
+      "source_file": "AGENTS.md",
+      "source_location": "L24"
     },
     {
       "id": "package",
@@ -1874,18 +1874,6 @@
   "links": [
     {
       "source": "src_components_flagquiz_flagquiz",
-      "target": "src_lib_shuffle_shuffle",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L102",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_flagquiz_flagquiz",
       "target": "src_lib_mistakes_writemistakes",
       "relation": "calls",
       "_origin": "ast",
@@ -1893,19 +1881,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L120",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
       "source": "src_components_flagquiz_flagquiz",
-      "target": "src_components_flagquiz_writebest",
+      "target": "src_components_flagquiz_writebeststreak",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L125",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -1917,7 +1905,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L135",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -1929,7 +1917,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L136",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -1941,7 +1929,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L344",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -1953,7 +1941,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L89",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -1965,7 +1953,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L89",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_flagquiz_flagquiz",
+      "target": "src_lib_shuffle_shuffle",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/components/FlagQuiz.tsx",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -1977,7 +1977,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L244",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -1989,7 +1989,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L249",
+      "source_location": "L238",
       "weight": 1.0
     },
     {
@@ -2001,11 +2001,11 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L250",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
-      "source": "src_components_flagquiz_flagquiz_nextcard",
+      "source": "src_components_flagquiz_flagquiz_nextreviewcard",
       "target": "src_components_flagquiz_flagquiz_discard",
       "relation": "calls",
       "_origin": "ast",
@@ -2013,7 +2013,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L231",
+      "source_location": "L220",
       "weight": 1.0
     },
     {
@@ -2025,7 +2025,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L214",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
@@ -2037,19 +2037,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L214",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
       "source": "src_components_flagquiz_flagquiz_startregion",
-      "target": "src_components_flagquiz_readbest",
+      "target": "src_components_flagquiz_readbeststreak",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L215",
+      "source_location": "L204",
       "weight": 1.0
     },
     {
@@ -2061,7 +2061,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L226",
+      "source_location": "L215",
       "weight": 1.0
     },
     {
@@ -2073,7 +2073,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L58",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -2085,55 +2085,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L60",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
-      "source": "src_components_flagquiz_readbest",
-      "target": "src_components_flagquiz_bestkey",
+      "source": "src_components_flagquiz_readbeststreak",
+      "target": "src_components_flagquiz_beststreakkey",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L71",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
-      "source": "src_components_flagquiz_writebest",
-      "target": "src_components_flagquiz_bestkey",
+      "source": "src_components_flagquiz_writebeststreak",
+      "target": "src_components_flagquiz_beststreakkey",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L81",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_game_gamereducer",
-      "target": "src_lib_mistakes_withoutmistake",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/lib/game.ts",
-      "source_location": "L109",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_game_gamereducer",
-      "target": "src_lib_game_advancedeck",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/lib/game.ts",
-      "source_location": "L110",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -2145,19 +2121,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/game.ts",
-      "source_location": "L116",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
       "source": "src_lib_game_gamereducer",
-      "target": "src_lib_game_commitbest",
+      "target": "src_lib_mistakes_withoutmistake",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/game.ts",
-      "source_location": "L118",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_game_gamereducer",
+      "target": "src_lib_game_advancedeck",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/game.ts",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -2221,18 +2209,6 @@
       "weight": 1.0
     },
     {
-      "source": "tests_game_test_fullrun",
-      "target": "tests_game_test_playing",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "tests/game.test.ts",
-      "source_location": "L25",
-      "weight": 1.0
-    },
-    {
       "source": "tests_game_test_playing",
       "target": "src_lib_game_initialstate",
       "relation": "calls",
@@ -2253,7 +2229,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/game.test.ts",
-      "source_location": "L30",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -2289,7 +2265,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L205",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -2301,7 +2277,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L52",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -2313,7 +2289,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "src/lib/game.ts",
-      "source_location": "L27",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -2655,18 +2631,6 @@
     {
       "source": "src_components_flagquiz",
       "target": "src_lib_game_initialstate",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_flagquiz",
-      "target": "src_lib_game_mode",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3194,6 +3158,39 @@
       "context": "import",
       "source_file": "tests/mistakes.test.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_development",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_documentation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "agents",
+      "target": "agents_graphify",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "AGENTS.md",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -3902,24 +3899,13 @@
     },
     {
       "source": "src_components_flagquiz",
-      "target": "src_components_flagquiz_bestkey",
+      "target": "src_components_flagquiz_beststreakkey",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L40",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_flagquiz",
-      "target": "src_components_flagquiz_modes",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L45",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -3930,7 +3916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L51",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -3941,7 +3927,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L56",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -3952,7 +3938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L57",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -3963,7 +3949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L59",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -3974,29 +3960,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L64",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
       "source": "src_components_flagquiz",
-      "target": "src_components_flagquiz_readbest",
+      "target": "src_components_flagquiz_readbeststreak",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L69",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
       "source": "src_components_flagquiz",
-      "target": "src_components_flagquiz_writebest",
+      "target": "src_components_flagquiz_writebeststreak",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L79",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -4007,7 +3993,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L87",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -4018,7 +4004,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L193",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -4029,7 +4015,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L200",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -4040,18 +4026,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L219",
+      "source_location": "L208",
       "weight": 1.0
     },
     {
       "source": "src_components_flagquiz_flagquiz",
-      "target": "src_components_flagquiz_flagquiz_nextcard",
+      "target": "src_components_flagquiz_flagquiz_nextreviewcard",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L230",
+      "source_location": "L219",
       "weight": 1.0
     },
     {
@@ -4062,7 +4048,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L236",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -4144,35 +4130,13 @@
     },
     {
       "source": "src_lib_game",
-      "target": "src_lib_game_mode",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/game.ts",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_game",
-      "target": "src_lib_game_phase",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/game.ts",
-      "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_game",
       "target": "src_lib_game_gamestate",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/game.ts",
-      "source_location": "L23",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -4183,7 +4147,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/game.ts",
-      "source_location": "L36",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -4194,7 +4158,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/game.ts",
-      "source_location": "L44",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -4205,18 +4169,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/game.ts",
-      "source_location": "L60",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_game",
-      "target": "src_lib_game_commitbest",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/game.ts",
-      "source_location": "L67",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -4227,7 +4180,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/game.ts",
-      "source_location": "L72",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_game",
+      "target": "src_lib_game_phase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/game.ts",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -4408,24 +4372,13 @@
     },
     {
       "source": "tests_game_test",
-      "target": "tests_game_test_fullrun",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/game.test.ts",
-      "source_location": "L24",
-      "weight": 1.0
-    },
-    {
-      "source": "tests_game_test",
       "target": "tests_game_test_reviewing",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/game.test.ts",
-      "source_location": "L28",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -4556,10 +4509,10 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "src/components/FlagQuiz.tsx",
-      "source_location": "L88",
+      "source_location": "L79",
       "weight": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "74690e95d37536ac4c5892e390807e2ae06336ac"
+  "built_at_commit": "779d6045921114707008ba359689777d299c3463"
 }

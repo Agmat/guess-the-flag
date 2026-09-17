@@ -21,6 +21,10 @@ function playing(overrides: Partial<GameState> = {}): GameState {
   };
 }
 
+function fullRun(overrides: Partial<GameState> = {}): GameState {
+  return playing({ mode: "full", ...overrides });
+}
+
 function reviewing(overrides: Partial<GameState> = {}): GameState {
   return {
     ...initialState(["FR", "DE", "US"]),
@@ -95,23 +99,63 @@ describe("gameReducer", () => {
     );
 
     const lastWrongThenAdvance = reviewing({ index: DECK.length - 1, phase: "reviewAnswer" });
-    expect(gameReducer(lastWrongThenAdvance, { type: "advanceReview" }).phase).toBe(
+    expect(gameReducer(lastWrongThenAdvance, { type: "advance" }).phase).toBe(
       "reviewDone",
     );
   });
 
-  it("advanceReview moves past a missed card mid-deck without touching mistakes", () => {
+  it("advance moves past a missed review card mid-deck without touching mistakes", () => {
     const state = reviewing({ index: 0, phase: "reviewAnswer" });
-    const next = gameReducer(state, { type: "advanceReview" });
+    const next = gameReducer(state, { type: "advance" });
     expect(next.index).toBe(1);
     expect(next.phase).toBe("review");
     expect(next.mistakes).toEqual(["FR", "DE", "US"]);
+  });
+
+  it("full run + wrong shows the answer, records the mistake, keeps score and index", () => {
+    const state = fullRun({ streak: 2, index: 1 });
+    const next = gameReducer(state, { type: "submit", correct: false });
+    expect(next.phase).toBe("missed");
+    expect(next.mistakes).toEqual(["DE"]);
+    expect(next.streak).toBe(2);
+    expect(next.index).toBe(1);
+    expect(next.newBest).toBe(false);
+  });
+
+  it("full run + advance after a miss moves to the next card", () => {
+    const state = fullRun({ phase: "missed", index: 0 });
+    const next = gameReducer(state, { type: "advance" });
+    expect(next.phase).toBe("playing");
+    expect(next.index).toBe(1);
+  });
+
+  it("full run + advance after a miss on the last card finishes and commits the score as best", () => {
+    const state = fullRun({ phase: "missed", index: DECK.length - 1, streak: 2, best: 1 });
+    const next = gameReducer(state, { type: "advance" });
+    expect(next.phase).toBe("won");
+    expect(next.best).toBe(2);
+    expect(next.newBest).toBe(true);
+  });
+
+  it("full run + correct on the last card finishes and commits the score as best", () => {
+    const state = fullRun({ index: DECK.length - 1, streak: 1, best: 5 });
+    const next = gameReducer(state, { type: "submit", correct: true });
+    expect(next.phase).toBe("won");
+    expect(next.streak).toBe(2);
+    expect(next.best).toBe(5);
+    expect(next.newBest).toBe(false);
+  });
+
+  it("advance while playing is a no-op", () => {
+    const state = fullRun({ index: 0 });
+    expect(gameReducer(state, { type: "advance" })).toBe(state);
   });
 
   it("startRegion resets streak, index and newBest but not mistakes", () => {
     const state = { ...playing({ streak: 5, index: 2, newBest: true }), mistakes: ["FR"] };
     const next = gameReducer(state, {
       type: "startRegion",
+      mode: "streak",
       filter: "Americas",
       deck: DECK,
       best: 7,

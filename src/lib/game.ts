@@ -6,21 +6,27 @@
 import type { Country } from "./match";
 import { withMistake, withoutMistake } from "./mistakes";
 
+// "streak": one wrong answer ends the run, best = longest streak.
+// "full": every card is played, best = most correct answers in a run.
+export type Mode = "streak" | "full";
+
 export type Phase =
   | "start"
   | "playing" // region mode, answering
-  | "gameover" // region mode, run ended on a wrong answer
-  | "won" // region mode, whole pool cleared
+  | "missed" // region mode (full), showing a missed answer before moving on
+  | "gameover" // region mode (streak), run ended on a wrong answer
+  | "won" // region mode, reached the end of the deck
   | "review" // review mode, answering
   | "reviewAnswer" // review mode, showing a missed answer before moving on
   | "reviewDone"; // review mode, reached the end of the deck
 
 export interface GameState {
   phase: Phase;
+  mode: Mode;
   filter: string;
   deck: Country[];
   index: number;
-  streak: number;
+  streak: number; // in "full" mode this is the score: it never resets on a miss
   best: number;
   newBest: boolean;
   mistakes: string[];
@@ -28,16 +34,17 @@ export interface GameState {
 }
 
 export type Action =
-  | { type: "startRegion"; filter: string; deck: Country[]; best: number }
+  | { type: "startRegion"; mode: Mode; filter: string; deck: Country[]; best: number }
   | { type: "startReview"; deck: Country[] }
   | { type: "submit"; correct: boolean }
-  | { type: "advanceReview" }
+  | { type: "advance" } // past a missed card (review or full run)
   | { type: "clearMistakes" }
   | { type: "goHome" };
 
 export function initialState(mistakes: string[]): GameState {
   return {
     phase: "start",
+    mode: "streak",
     filter: "All",
     deck: [],
     index: 0,
@@ -57,11 +64,17 @@ function advanceDeck(state: GameState): Pick<GameState, "index" | "phase"> {
     : { index: state.index + 1, phase: "review" };
 }
 
+function commitBest(state: GameState, score: number): Pick<GameState, "best" | "newBest"> {
+  const beatsBest = score > state.best;
+  return { best: beatsBest ? score : state.best, newBest: beatsBest };
+}
+
 export function gameReducer(state: GameState, action: Action): GameState {
   switch (action.type) {
     case "startRegion":
       return {
         ...state,
+        mode: action.mode,
         filter: action.filter,
         deck: action.deck,
         best: action.best,
@@ -101,32 +114,24 @@ export function gameReducer(state: GameState, action: Action): GameState {
 
       if (!action.correct) {
         const mistakes = withMistake(state.mistakes, current.code);
-        const beatsBest = state.streak > state.best;
-        return {
-          ...state,
-          mistakes,
-          best: beatsBest ? state.streak : state.best,
-          newBest: beatsBest,
-          phase: "gameover",
-        };
+        if (state.mode === "full") return { ...state, mistakes, phase: "missed" };
+        return { ...state, mistakes, ...commitBest(state, state.streak), phase: "gameover" };
       }
 
       const streak = state.streak + 1;
       if (isLastCard) {
-        const beatsBest = streak > state.best;
-        return {
-          ...state,
-          streak,
-          best: beatsBest ? streak : state.best,
-          newBest: beatsBest,
-          phase: "won",
-        };
+        return { ...state, streak, ...commitBest(state, streak), phase: "won" };
       }
       return { ...state, streak, index: state.index + 1 };
     }
 
-    case "advanceReview":
-      return { ...state, ...advanceDeck(state) };
+    case "advance": {
+      if (state.phase === "reviewAnswer") return { ...state, ...advanceDeck(state) };
+      if (state.phase !== "missed") return state;
+      const isLastCard = state.index + 1 >= state.deck.length;
+      if (isLastCard) return { ...state, ...commitBest(state, state.streak), phase: "won" };
+      return { ...state, index: state.index + 1, phase: "playing" };
+    }
 
     case "clearMistakes":
       return { ...state, mistakes: [] };

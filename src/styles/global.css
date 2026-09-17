@@ -262,6 +262,50 @@ body:has(.quiz--game) {
   color: var(--muted);
 }
 
+.modes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+}
+
+.mode {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 3px 0 var(--line-strong);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.mode:hover,
+.mode--active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.mode:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mode__title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.mode__note {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
 .regions {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

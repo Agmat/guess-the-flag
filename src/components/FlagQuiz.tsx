@@ -10,7 +10,7 @@ import countriesData from "../data/countries.json";
 import { isCorrectAnswer, type Country } from "../lib/match";
 import { shuffle } from "../lib/shuffle";
 import { RegionIcon } from "./RegionIcon";
-import { gameReducer, initialState } from "../lib/game";
+import { gameReducer, initialState, type Mode } from "../lib/game";
 import { readMistakes, writeMistakes } from "../lib/mistakes";
 
 const COUNTRIES = countriesData as unknown as Country[];
@@ -36,7 +36,16 @@ const FLASH_MS = 550;
 const DISCARD_MS = 420;
 const HERO_DISCARD_MS = 620;
 
-const bestStreakKey = (filter: string) => `guess-the-flag:best:${filter}`;
+// Streak mode keeps the original key so existing bests survive.
+const bestKey = (mode: Mode, filter: string) =>
+  mode === "full"
+    ? `guess-the-flag:best:full:${filter}`
+    : `guess-the-flag:best:${filter}`;
+
+const MODES: { id: Mode; title: string; note: string }[] = [
+  { id: "streak", title: "Survival", note: "One miss ends the run" },
+  { id: "full", title: "Full run", note: "See every flag, score at the end" },
+];
 
 /** A card currently flying off the top of the deck. */
 interface Discarded {
@@ -57,9 +66,9 @@ const poolFor = (filter: Filter) =>
     ? COUNTRIES
     : COUNTRIES.filter((country) => country.continent === filter);
 
-function readBestStreak(filter: string): number {
+function readBest(mode: Mode, filter: string): number {
   try {
-    const raw = localStorage.getItem(bestStreakKey(filter));
+    const raw = localStorage.getItem(bestKey(mode, filter));
     const value = raw ? Number.parseInt(raw, 10) : 0;
     return Number.isFinite(value) && value > 0 ? value : 0;
   } catch {
@@ -67,9 +76,9 @@ function readBestStreak(filter: string): number {
   }
 }
 
-function writeBestStreak(filter: string, value: number): void {
+function writeBest(mode: Mode, filter: string, value: number): void {
   try {
-    localStorage.setItem(bestStreakKey(filter), String(value));
+    localStorage.setItem(bestKey(mode, filter), String(value));
   } catch {
     // storage unavailable (private mode, disabled cookies) - ignore
   }
@@ -79,10 +88,11 @@ export default function FlagQuiz() {
   const [state, dispatch] = useReducer(gameReducer, [], () =>
     initialState(readMistakes()),
   );
-  const { phase, filter, deck, index, streak, best, newBest, mistakes, reviewStats } =
+  const { phase, mode, filter, deck, index, streak, best, newBest, mistakes, reviewStats } =
     state;
 
   const [input, setInput] = useState("");
+  const [pickedMode, setPickedMode] = useState<Mode>("streak");
   const [flash, setFlash] = useState(false);
   const [failedCode, setFailedCode] = useState<string | null>(null);
   // Screen-reader announcement for the last answer - the flash and result
@@ -112,8 +122,8 @@ export default function FlagQuiz() {
 
   // Persist a new best streak whenever the reducer sets one.
   useEffect(() => {
-    if (newBest) writeBestStreak(filter, best);
-  }, [newBest, best, filter]);
+    if (newBest) writeBest(mode, filter, best);
+  }, [newBest, best, mode, filter]);
 
   // Warm the next flag so it appears instantly on a correct answer. Match
   // the rendered <img>'s srcset/sizes (below) so this resolves to the same
@@ -192,16 +202,17 @@ export default function FlagQuiz() {
     window.setTimeout(() => setFlash(false), FLASH_MS);
   }
 
-  function startRegion(nextFilter: Filter): void {
+  function startRegion(nextFilter: Filter, nextMode: Mode): void {
     setInput("");
     setFlash(false);
     setOutgoing(null);
     setHeroOutgoing(null);
     dispatch({
       type: "startRegion",
+      mode: nextMode,
       filter: nextFilter,
       deck: shuffle(poolFor(nextFilter)),
-      best: readBestStreak(nextFilter),
+      best: readBest(nextMode, nextFilter),
     });
   }
 
@@ -215,11 +226,11 @@ export default function FlagQuiz() {
     dispatch({ type: "startReview", deck: shuffle(pool) });
   }
 
-  // The "Next flag" button after a missed review card: discard, then advance.
-  function nextReviewCard(): void {
+  // The "Next flag" button after a missed card: discard, then advance.
+  function nextCard(): void {
     if (current) discard(current);
     setInput("");
-    dispatch({ type: "advanceReview" });
+    dispatch({ type: "advance" });
   }
 
   function handleSubmit(event: FormEvent): void {
@@ -291,8 +302,27 @@ export default function FlagQuiz() {
         <div className="intro">
           <h2 className="intro__title">Name every flag</h2>
           <p className="intro__lede">
-            Type the country in English or French. One wrong answer ends the run.
+            Type the country in English or French.{" "}
+            {pickedMode === "full"
+              ? "Go through every flag and see how many you know."
+              : "One wrong answer ends the run."}
           </p>
+        </div>
+
+        <p className="section-label">Choose a mode</p>
+        <div className="modes" role="group" aria-label="Game mode">
+          {MODES.map((option) => (
+            <button
+              key={option.id}
+              className={`mode${pickedMode === option.id ? " mode--active" : ""}`}
+              type="button"
+              aria-pressed={pickedMode === option.id}
+              onClick={() => setPickedMode(option.id)}
+            >
+              <span className="mode__title">{option.title}</span>
+              <span className="mode__note">{option.note}</span>
+            </button>
+          ))}
         </div>
 
         <p className="section-label">Choose a region</p>
@@ -307,7 +337,7 @@ export default function FlagQuiz() {
                 style={
                   { "--dot": style.dot, "--tint": style.tint } as CSSProperties
                 }
-                onClick={() => startRegion(option)}
+                onClick={() => startRegion(option, pickedMode)}
               >
                 <RegionIcon region={option} />
                 <span className="region__name">{option}</span>
@@ -354,7 +384,8 @@ export default function FlagQuiz() {
 
   const inReview =
     phase === "review" || phase === "reviewAnswer" || phase === "reviewDone";
-  const showsWrong = phase === "gameover" || phase === "reviewAnswer";
+  const showsWrong =
+    phase === "gameover" || phase === "reviewAnswer" || phase === "missed";
   const progressPct = deck.length
     ? (Math.min(index + 1, deck.length) / deck.length) * 100
     : 0;
@@ -378,7 +409,9 @@ export default function FlagQuiz() {
       </p>
       <header className="hud">
         <div className="stat">
-          <span className="stat__label">{inReview ? "Cleared" : "Streak"}</span>
+          <span className="stat__label">
+            {inReview ? "Cleared" : mode === "full" ? "Score" : "Streak"}
+          </span>
           <span
             className="stat__value"
             key={inReview ? reviewStats.correct : streak}
@@ -477,7 +510,20 @@ export default function FlagQuiz() {
           <p className="result__name">{current.en}</p>
           <p className="result__fr">{current.fr}</p>
           <div className="result__actions">
-            <button className="button" type="button" onClick={nextReviewCard}>
+            <button className="button" type="button" onClick={nextCard}>
+              {isLastCard ? "Finish" : "Next flag"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {phase === "missed" && current && (
+        <div className="result result--wrong">
+          <p className="result__eyebrow">That was</p>
+          <p className="result__name">{current.en}</p>
+          <p className="result__fr">{current.fr}</p>
+          <div className="result__actions">
+            <button className="button" type="button" onClick={nextCard} autoFocus>
               {isLastCard ? "Finish" : "Next flag"}
             </button>
           </div>
@@ -497,7 +543,7 @@ export default function FlagQuiz() {
             <button
               className="button"
               type="button"
-              onClick={() => startRegion(filter as Filter)}
+              onClick={() => startRegion(filter as Filter, mode)}
             >
               Play again
             </button>
@@ -514,19 +560,32 @@ export default function FlagQuiz() {
 
       {phase === "won" && (
         <div className="result result--win">
-          <p className="result__eyebrow">Perfect run</p>
-          <p className="result__name">
-            You named all {deck.length} flags
-            {filter === "All" ? "" : ` in ${filter}`} 🏆
-          </p>
+          {streak === deck.length ? (
+            <>
+              <p className="result__eyebrow">Perfect run</p>
+              <p className="result__name">
+                You named all {deck.length} flags
+                {filter === "All" ? "" : ` in ${filter}`} 🏆
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="result__eyebrow">Run complete</p>
+              <p className="result__name">
+                You knew {streak} of {deck.length} flags
+                {filter === "All" ? "" : ` in ${filter}`}
+              </p>
+            </>
+          )}
           <p className="result__note">
-            Streak: <strong>{streak}</strong>
+            {mode === "full" ? "Score" : "Streak"}: <strong>{streak}</strong>
+            {newBest ? " — new best!" : ` · Best: ${best}`}
           </p>
           <div className="result__actions">
             <button
               className="button"
               type="button"
-              onClick={() => startRegion(filter as Filter)}
+              onClick={() => startRegion(filter as Filter, mode)}
             >
               Play again
             </button>
